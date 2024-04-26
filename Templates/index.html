@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+</head>
+<body>
+    <h1>Speech Recognition</h1>
+    <button id="recordButton">Start Recognition</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('recordButton').addEventListener('click', function() {
+            // Send a POST request to the Flask server
+            fetch('/recognize', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the recognition result in the 'result' div
+                    document.getElementById('result').textContent = data.text;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
